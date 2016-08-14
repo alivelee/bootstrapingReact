@@ -1,0 +1,44 @@
+var debug = process.env.NODE_ENV !== "production";
+var path = require('path');
+var webpack = require('webpack');
+
+module.exports = {
+  devtool: debug ? 'source-map':null,
+  entry: [
+    'webpack-hot-middleware/client',
+    './client/App'
+  ],
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/static/'
+  },
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ],
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        loaders: ['babel'],
+        include: path.join(__dirname, 'client')
+      },
+      {
+        test: /\.scss$/,
+        loaders: ["style", "css", "sass"]
+      },
+      {
+        test: /\.(jpg|png)$/,
+        loader: 'url?limit=25000',
+        include: path.join(__dirname,'client','images')
+      },
+      {
+        test: /\.svg$/,
+        loader:'file',
+        include: path.join(__dirname,'client','images')
+      }
+    ]
+  }
+};
