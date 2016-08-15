@@ -5,7 +5,6 @@ var webpack = require('webpack');
 module.exports = {
     devtool: debug ? 'source-map':null,
     entry: [
-        'webpack-hot-middleware/client',
         './client/App.jsx'
     ],
     output: {
