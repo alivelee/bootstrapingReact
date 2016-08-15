@@ -21,7 +21,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         loaders: ['babel'],
         include: path.join(__dirname, 'client')
       },
@@ -38,6 +38,10 @@ module.exports = {
         test: /\.svg$/,
         loader:'file',
         include: path.join(__dirname,'client','images')
+      },
+      {
+        test: /\.css$/,
+        loader:'style-loader!css-loader'
       }
     ]
   }
